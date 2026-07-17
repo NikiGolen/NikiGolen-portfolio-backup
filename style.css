@@ -209,3 +209,18 @@ h3 { font-size: 1.4rem; }
   .contact-grid { flex-direction: column; gap: 1rem; }
   .hero-headline { font-size: 2rem; }
 }
+/* Center the slideshow container */
+.slideshow-container {
+    max-width: 500px; 
+    margin: auto;     
+    position: relative;
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
+/* Ensure images fit inside the container */
+.slide {
+    width: 100%;      
+    height: auto;    
+    display: none;    
+}
