@@ -45,6 +45,25 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: '-40% 0px -50% 0px' });
+// Slideshow logic for Serotonin Boost page
+let slideIndex = 0;
+
+function showSlides() {
+  let slides = document.getElementsByClassName("slide");
+  // Safety check: only run if there are slides on the page
+  if (slides.length > 0) {
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex-1].style.display = "block";  
+    setTimeout(showSlides, 3000); 
+  }
+}
+
+// Start the slideshow
+showSlides();
 
 sections.forEach((section) => {
   if (section.id) observer.observe(section);
