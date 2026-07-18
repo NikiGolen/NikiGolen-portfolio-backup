@@ -4,11 +4,9 @@
 (function () {
   const commitLog = document.querySelector('.commit-log');
   if (!commitLog) return;
-
   commitLog.querySelectorAll('.commit').forEach((commit, index) => {
     commit.style.setProperty('--i', index);
   });
-
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -20,22 +18,21 @@
     },
     { threshold: 0.3 }
   );
-
   observer.observe(commitLog);
 })();
 
 // ============================================================
 // Footer year
 // ============================================================
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // ============================================================
 // Highlight the nav link for the section currently in view
 // ============================================================
 const sections = document.querySelectorAll('.section, .hero');
 const navLinks = document.querySelectorAll('.nav-link');
-
-const observer = new IntersectionObserver((entries) => {
+const navObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const id = entry.target.getAttribute('id');
@@ -45,45 +42,25 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: '-40% 0px -50% 0px' });
-// Slideshow logic for Serotonin Boost page
-let slideIndex = 0;
-
-function showSlides() {
-  let slides = document.getElementsByClassName("slide");
-  // Safety check: only run if there are slides on the page
-  if (slides.length > 0) {
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}    
-    slides[slideIndex-1].style.display = "block";  
-    setTimeout(showSlides, 3000); 
-  }
-}
-
-// Start the slideshow
-showSlides();
 
 sections.forEach((section) => {
-  if (section.id) observer.observe(section);
+  if (section.id) navObserver.observe(section);
 });
-let slideIndex = 0;
-showSlides();
 
+// ============================================================
+// Slideshow logic for Serotonin Boost page
+// ============================================================
+let slideIndex = 0;
 function showSlides() {
   let slides = document.getElementsByClassName("slide");
-  // Hide all slides
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+  if (slides.length > 0) {
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000);
   }
-  // Increment index and loop back to the start
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  
-  // Display the current slide
-  slides[slideIndex-1].style.display = "block";  
-  
-  // Change image every 3 seconds
-  setTimeout(showSlides, 3000); 
 }
+showSlides();
