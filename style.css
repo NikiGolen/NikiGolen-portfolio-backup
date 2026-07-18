@@ -73,7 +73,24 @@ ul { list-style: none; margin: 0; padding: 0; }
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
+.slideshow-container {
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+    border: 6px solid #2b2b2b;
+    overflow: hidden;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
 
+.slide {
+    width: 100%;
+    height: auto;
+    display: none;
+    border-radius: 4px;
+}
 .name {
   font-family: var(--font-display);
   font-size: 1.5rem;
